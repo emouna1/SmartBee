@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <div class="container">
+  <h2><p> Gestion des ruches  </p></h2>
+<div *ngIf="ruches.length === 0"> 
+    aucune ruche trouvée 
+</div>
+<div *ngIf="ruches.length > 0">
+  <table class="table table-responsive table-dark table-bordered">
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Emplacement</th>
+        <th>Actions</th>
+       </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ruche of ruches">
+        <td>{{ruche.id}}</td><td>{{ruche.nom}}</td><td>{{ruche.localisation}}</td> 
+        <td>
+          <button (click)="editRucheForm(ruche.id)">Modifier</button>
+          <button (click)="deleteRuche(ruche)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br><h3>voulez vous ajouter une nouvelle ruche : </h3>
+<form #rucheForm="ngForm">
+  <div class="mb-2">
+    <label for="nom" class="form-label">Nom</label>
+    <input type="text" class="form-control" id="nom" name="nom"  [(ngModel)]="rucheForm.value.nom" required>
+  </div>
+  <div class="mb-2">
+    <label for="emp" class="form-label">Emplacement</label>
+    <input type="text" class="form-control" id="emp" name="emplacement" [(ngModel)]="rucheForm.value.emp" required>
+  </div>
+  <div class="text-center">
+    <button type="button" class="btn btn-primary" (click)="addRuche(rucheForm.value.nom,rucheForm.value.emp)">Submit</button>
+  </div>
+</form>
+<h3>Voulez-vous modifier une ruche :</h3>
+    <form #editRucheForm="ngForm" *ngIf="editRucheId">
+      <div class="mb-2">
+        <label for="editNom" class="form-label">Nom</label>
+        <input type="text" class="form-control" id="editNom" name="editNom" [(ngModel)]="editRuche.nom" required>
+      </div>
+      <div class="mb-2">
+        <label for="editEmplacement" class="form-label">Emplacement</label>
+        <input type="text" class="form-control" id="editEmplacement" name="editEmplacement" [(ngModel)]="editRuche.localisation" required>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" (click)="updateRuche()">Modifier</button>
+      </div>
+    </form>
+</div>
+</body>
+</html>

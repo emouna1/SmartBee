@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <div class="container">
+    <h2>Gestion des récoltes de miel</h2>
+
+    <div *ngIf="recoltes.length === 0"> 
+      Aucune récolte trouvée
+    </div>
+
+    <div *ngIf="recoltes.length > 0">
+      <table class="table table-responsive table-dark table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date de récolte</th>
+            <th>Quantité de miel (en kg)</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let recolte of recoltes">
+            <td>{{ recolte['id'] }}</td>
+            <td>{{ recolte.dateRecolte | date }}</td>
+            <td>{{ recolte.quantiteMiel }}</td>
+            <td>
+              <button (click)="editRecolteForm(recolte['id'])">Modifier</button>
+              <button (click)="deleteRecolte(recolte)">Supprimer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Ajouter une nouvelle récolte :</h3>
+    <form #recolteForm="ngForm">
+      <div class="mb-2">
+        <label for="dateRecolte" class="form-label">Date de récolte</label>
+        <input type="date" class="form-control" id="dateRecolte" name="dateRecolte" [(ngModel)]="recolteForm.value.dateRecolte" required>
+      </div>
+      <div class="mb-2">
+        <label for="quantiteMiel" class="form-label">Quantité de miel récoltée (en kg)</label>
+        <input type="number" class="form-control" id="quantiteMiel" name="quantiteMiel" [(ngModel)]="recolteForm.value.quantiteMiel" required>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" (click)="enregistrerRecolte()">Enregistrer</button>
+      </div>
+    </form>
+
+    <h3>Modifier une récolte :</h3>
+    <form #editRecolteForm="ngForm" *ngIf="editRecolteId">
+      <div class="mb-2">
+        <label for="editDateRecolte" class="form-label">Date de récolte</label>
+        <input type="date" class="form-control" id="editDateRecolte" name="editDateRecolte" [(ngModel)]="editRecolte.dateRecolte" required>
+      </div>
+      <div class="mb-2">
+        <label for="editQuantiteMiel" class="form-label">Quantité de miel récoltée (en kg)</label>
+        <input type="number" class="form-control" id="editQuantiteMiel" name="editQuantiteMiel" [(ngModel)]="editRecolte.quantiteMiel" required>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" (click)="updateRecolte()">Modifier</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

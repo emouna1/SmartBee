@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <div class="container">
+    <h2><p>Zone Management</p></h2>
+    <div *ngIf="zones.length === 0"> 
+        No zones found 
+    </div>
+    <div *ngIf="zones.length > 0">
+      <table class="table table-responsive table-bordered table-warning border-dark">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Region</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let zone of zones">
+            <td>{{ zone.id }}</td>
+            <td>{{ zone.nom }}</td>
+            <td>{{ zone.region }}</td>
+            <td>
+              <button (click)="editZoneForm(zone.id)">Edit</button>
+              <button (click)="deleteZone(zone)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <h3>Add a New Zone:</h3>
+    <form #zoneForm="ngForm">
+      <div class="mb-2">
+        <label for="zoneId" class="form-label">Zone Id</label>
+        <input type="text" class="form-control" id="zoneId" name="zoneId" [(ngModel)]="zoneForm.value.zoneId" required>
+      </div>
+      <div class="mb-2">
+        <label for="zoneName" class="form-label">Zone Name</label>
+        <input type="text" class="form-control" id="zoneNom" name="zoneNom" [(ngModel)]="zoneForm.value.zoneNom" required>
+      </div>
+      <div class="mb-2">
+        <label for="zoneRegion" class="form-label">Zone Region</label>
+        <input type="text" class="form-control" id="zoneRegion" name="zoneRegion" [(ngModel)]="zoneForm.value.zoneRegion" required>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" (click)="addZone(zoneForm.value.zoneId,zoneForm.value.zoneNom,zoneForm.value.zoneRegion)">Submit</button>
+      </div>
+    </form>
+    <h3>Edit a Zone:</h3>
+    <form #editZoneForm="ngForm" *ngIf="editZoneId">
+      <div class="mb-2">
+        <label for="editZoneName" class="form-label">Zone Name</label>
+        <input type="text" class="form-control" id="editZoneNom" name="editZoneNom" [(ngModel)]="editZone.nom" required>
+      </div>
+      <div class="mb-2">
+        <label for="editZoneRegion" class="form-label">Zone Region</label>
+        <input type="text" class="form-control" id="editZoneRegion" name="editZoneRegion" [(ngModel)]="editZone.region" required>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" (click)="updateZone()">Update</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

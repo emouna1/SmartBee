@@ -1,0 +1,129 @@
+<!-- list-zones.component.html -->
+<div class="container">
+  <div class="zone-list-container">
+    <h2>Zones</h2>
+    <table mat-table [dataSource]="zones">
+  
+      <!-- Column definitions -->
+      <ng-container matColumnDef="zoneName">
+        <th mat-header-cell *matHeaderCellDef> Zone Name </th>
+        <td mat-cell *matCellDef="let zone; let i = index">
+          <ng-container *ngIf="editingRowIndex === i; else displayField">
+            <mat-form-field>
+              <input matInput formControlName="zoneName" placeholder="Zone Name">
+            </mat-form-field>
+          </ng-container>
+          <ng-template #displayField>
+            {{ zone.zone_name }}
+          </ng-template>
+        </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="speciesName">
+        <th mat-header-cell *matHeaderCellDef> Species Name </th>
+        <td mat-cell *matCellDef="let zone; let i = index">
+          <ng-container *ngIf="editingRowIndex === i; else displayField">
+            <mat-form-field>
+              <input matInput formControlName="speciesName" placeholder="Species Name">
+            </mat-form-field>
+          </ng-container>
+          <ng-template #displayField>
+            {{ zone.species_name }}
+          </ng-template>
+        </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="rucheCount">
+        <th mat-header-cell *matHeaderCellDef> Ruche Count </th>
+        <td mat-cell *matCellDef="let zone; let i = index">
+          <ng-container *ngIf="editingRowIndex === i; else displayField">
+            <mat-form-field>
+              <input matInput formControlName="rucheCount" placeholder="Ruche Count">
+            </mat-form-field>
+          </ng-container>
+          <ng-template #displayField>
+            {{ zone.ruche_count }}
+          </ng-template>
+        </td>
+      </ng-container>
+      
+  >
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let zone; let i = index">
+      <ng-container *ngIf="editingRowIndex === i; else displayButtons">
+        <button mat-icon-button color="primary" (click)="saveEditedZone(i)">
+          <mat-icon>done</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="cancelEditing(i)">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </ng-container>
+      <ng-template #displayButtons>
+        <button mat-icon-button style="background-color: #4CAF50; color: rgb(35, 141, 228);" (click)="editZone(i)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button style="background-color: #f44336; color: white;" (click)="deleteZone(zone)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </ng-template>
+    </td>
+  </ng-container>
+  
+  <td mat-cell *matCellDef="let zone; let i = index">
+    <ng-container *ngIf="editingRowIndex === i; else displayField">
+      <mat-form-field>
+        <input matInput formControlName="zoneName" placeholder="Zone Name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="speciesName" placeholder="Species Name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="rucheCount" placeholder="Ruche Count">
+        <mat-error *ngIf="editingFormGroup[i]?.get('rucheCount')?.hasError('required')">Ruche count is required</mat-error>
+        <mat-error *ngIf="editingFormGroup[i]?.get('rucheCount')?.hasError('pattern')">Invalid ruche count</mat-error>
+      </mat-form-field>
+    </ng-container>
+    <ng-template #displayField>
+      {{ zone.zoneName }}
+    </ng-template>
+  </td>
+  
+      <!-- Header and row definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let zone; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  
+<br>
+<h3>Add New Zone</h3>
+<form [formGroup]="addZoneForm" (ngSubmit)="addZone()">
+  <mat-form-field>
+    <input matInput formControlName="zoneId" placeholder="Zone Id">
+    <mat-error *ngIf="addZoneForm?.get('zoneId')?.hasError('required')">Zone id is required</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="zoneName" placeholder="Zone Name">
+    <mat-error *ngIf="addZoneForm?.get('zoneName')?.hasError('required')">Zone name is required</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="speciesId" placeholder="species id">
+    <mat-error *ngIf="addZoneForm?.get('speciesId')?.hasError('required')">species is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="speciesName" placeholder="Species Name">
+    <mat-error *ngIf="addZoneForm?.get('speciesName')?.hasError('required')">Species name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="rucheCount" placeholder="Ruche Count">
+    <mat-error *ngIf="addZoneForm?.get('rucheCount')?.hasError('required')">Ruche count is required</mat-error>
+    <mat-error *ngIf="addZoneForm?.get('rucheCount')?.hasError('pattern')">Invalid ruche count</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" >Add Zone</button>
+</form>
+<br>
+
+</div>

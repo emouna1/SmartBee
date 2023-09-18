@@ -1,0 +1,7 @@
+.container {
+  min-height: 100vh;
+  background-image: url('../../assets/Bees-and-honey-vector-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

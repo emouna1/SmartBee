@@ -1,0 +1,24 @@
+<div class="container">
+    <h2 class="text-center">Suivi des colonies d'abeilles</h2>
+  
+    <!-- Form to add a new colony -->
+    <form class="my-4">
+      <div class="mb-3">
+        <label for="colony-name" class="form-label">Nom de la colonie :</label>
+        <input type="text" class="form-control" id="colony-name" [(ngModel)]="newColonyName">
+      </div>
+      <div class="mb-3">
+        <label for="colony-location" class="form-label">Emplacement de la colonie :</label>
+        <input type="text" class="form-control" id="colony-location" [(ngModel)]="newColonyLocation">
+      </div>
+      <button class="btn btn-primary" (click)="addColony()">Ajouter</button>
+    </form>
+  
+    <!-- List of colonies -->
+    <h3>Liste des colonies enregistrées :</h3>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let colony of colonies">
+        {{ colony.name }} - {{ colony.location }}
+      </li>
+    </ul>
+  </div>

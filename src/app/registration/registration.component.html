@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <div class="container">
+    <h2><p>User Management</p></h2>
+    <div *ngIf="accounts.length === 0"> 
+        No accounts found 
+    </div>
+    <div *ngIf="accounts.length > 0">
+      <table class="table table-responsive table-bordered table-warning border-dark">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Family Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Permission Key</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of accounts">
+            <td>{{ account.id }}</td>
+            <td>{{ account.name }}</td>
+            <td>{{ account.family_name }}</td>
+            <td>{{ account.email }}</td>
+            <td>{{ account.password }}</td>
+            <td>{{ account.permission_key }}</td>
+            <td>
+              <button (click)="editAccountForm(account.id)">Edit</button>
+              <button (click)="deleteAccount(account)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <h3>Register a new user :</h3>
+    <form #accountForm="ngForm">
+      <div class="mb-2">
+        <label for="accountId" class="form-label">Account Id</label>
+        <input type="text" class="form-control" id="accountId" name="accountId" [(ngModel)]="accountForm.value.accountId" required>
+      </div>
+      <div class="mb-2">
+        <label for="accountName" class="form-label"> Name</label>
+        <input type="text" class="form-control" id="accountName" name="accountName" [(ngModel)]="accountForm.value.accountName" required>
+      </div>
+      <div class="mb-2">
+        <label for="accountFamilyName" class="form-label">Family Name</label>
+        <input type="text" class="form-control" id="accountFamilyName" name="accountFamilyName" [(ngModel)]="accountForm.value.accountFamilyName" required>
+      </div>
+      <div class="mb-2">
+        <label for="accountEmail" class="form-label">Email</label>
+        <input type="email" class="form-control" id="accountEmail" name="accountEmail" [(ngModel)]="accountForm.value.accountEmail" required>
+      </div>
+      <div class="mb-2">
+        <label for="accountPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="accountPassword" name="accountPassword" [(ngModel)]="accountForm.value.accountPassword" required>
+      </div>
+      <div class="mb-2">
+        <label for="accountPermissionKey" class="form-label">Permission Key</label>
+        <input type="text" class="form-control" id="accountPermissionKey" name="accountPermissionKey" [(ngModel)]="accountForm.value.accountPermissionKey" required>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" (click)="addAccount(accountForm.value.accountId,accountForm.value.accountName,accountForm.value.accountFamilyName,accountForm.value.accountEmail,accountForm.value.accountPassword,accountForm.value.accountPermissionKey)"> Submit</button>
+      </div>
+    </form>
+    <h3>Edit an Account:</h3>
+    <form #editAccountForm="ngForm" *ngIf="editAccountId">
+      <div class="mb-2">
+        <label for="editAccountName" class="form-label">Account Name</label>
+        <input type="text" class="form-control" id="editAccountName" name="editAccountName" [(ngModel)]="editAccount.name" required>
+      </div>
+      <div class="mb-2">
+        <label for="editAccountFamilyName" class="form-label">Family Name</label>
+        <input type="text" class="form-control" id="editAccountFamilyName" name="editAccountFamilyName" [(ngModel)]="editAccount.family_name" required>
+      </div>
+      <div class="mb-2">
+        <label for="editAccountEmail" class="form-label">Email</label>
+        <input type="email" class="form-control" id="editAccountEmail" name="editAccountEmail" [(ngModel)]="editAccount.email" required>
+      </div>
+      <div class="mb-2">
+        <label for="editAccountPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="editAccountPassword" name="editAccountPassword" [(ngModel)]="editAccount.password" required>
+      </div>
+      <div class="mb-2">
+        <label for="editAccountPermissionKey" class="form-label">Permission Key</label>
+        <input type="text" class="form-control" id="editAccountPermissionKey" name="editAccountPermissionKey" [(ngModel)]="editAccount.permission_key" required>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" (click)="updateAccount()">Update</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

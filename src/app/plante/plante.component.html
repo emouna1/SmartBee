@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <div class="container">
+  <h2><p> Gestion des plantes mellifères  </p></h2>
+<div *ngIf="plantes.length === 0"> 
+    Aucune plante mellifère trouvée 
+</div>
+<div *ngIf="plantes.length > 0">
+  <table class="table table-responsive  table-bordered table-warning border-dark">
+    <thead>
+        <tr>
+          <th>Id</th> 
+        <th>Nom de la plante</th>
+        <th>Type de fleurs</th>
+        <th>Abondance de nectar et pollen</th>
+        <th>Durée de la floraison</th>
+        <th>Conditions de croissance</th>
+        <th>Nombre max de ruches recommandées</th>
+        <th>Actions</th>
+       </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let plante of plantes">
+        <td>{{plante.id}}</td>
+        <td>{{plante.nom}}</td>
+        <td>{{plante.typeFleurs}}</td>
+        <td>{{plante.abondanceNectarPollen}}</td>
+        <td>{{plante.dureeFloraison}}</td>
+        <td>{{plante.conditionsCroissance}}</td>
+        <td>{{plante.nombreRuchesMax}}</td> 
+        <td>
+          <button (click)="editPlanteForm(plante.nom)">Modifier</button>
+          <button (click)="deletePlante(plante)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br><h3>Voulez-vous ajouter une nouvelle plante mellifère :</h3>
+<form #planteForm="ngForm">
+  <div class="mb-2">
+    <label for="nom" class="form-label">Nom de la plante</label>
+    <input type="text" class="form-control" id="nom" name="nom"  [(ngModel)]="planteForm.value.nom" required>
+  </div>
+  <div class="mb-2">
+    <label for="typeFleurs" class="form-label">Type de fleurs</label>
+    <input type="text" class="form-control" id="typeFleurs" name="typeFleurs" [(ngModel)]="planteForm.value.typeFleurs" required>
+  </div>
+ 
+  <div class="mb-2">
+    <label for="abondanceNectarPollen" class="form-label">Abondance de nectar et pollen</label>
+    <input type="text" class="form-control" id="abondanceNectarPollen" name="abondanceNectarPollen" [(ngModel)]="planteForm.value.abondanceNectarPollen" required>
+  </div>
+  <div class="mb-2">
+    <label for="dureeFloraison" class="form-label">Durée de la floraison</label>
+    <input type="text" class="form-control" id="dureeFloraison" name="dureeFloraison" [(ngModel)]="planteForm.value.dureeFloraison" required>
+  </div>
+  <div class="mb-2">
+    <label for="conditionsCroissance" class="form-label">Conditions de croissance</label>
+    <input type="text" class="form-control" id="conditionsCroissance" name="conditionsCroissance" [(ngModel)]="planteForm.value.conditionsCroissance" required>
+  </div>
+  <div class="mb-2">
+    <label for="nombreRuchesMax" class="form-label">Nombre maximum de ruches recommandées</label>
+    <input type="number" class="form-control" id="nombreRuchesMax" name="nombreRuchesMax" [(ngModel)]="planteForm.value.nombreRuchesMax" required>
+  </div>
+  <div class="text-center">
+    <button type="button" class="btn btn-primary" (click)="addPlante(planteForm.value.nom, planteForm.value.typeFleurs, planteForm.value.floraison, planteForm.value.abondanceNectarPollen, planteForm.value.dureeFloraison, planteForm.value.conditionsCroissance, planteForm.value.nombreRuchesMax)">Submit</button>
+  </div>
+</form>
+<h3>Voulez-vous modifier une plante mellifère :</h3>
+    <form #editPlanteForm="ngForm" *ngIf="editPlanteNom">
+      <div class="mb-2">
+        <label for="editTypeFleurs" class="form-label">Type de fleurs</label>
+        <input type="text" class="form-control" id="editTypeFleurs" name="editTypeFleurs" [(ngModel)]="editPlante.typeFleurs" required>
+      </div>
+      <div class="mb-2">
+        <label for="editNom" class="form-label">Nom de la plante</label>
+        <input type="text" class="form-control" id="editNom" name="editNom" [(ngModel)]="editPlante.nom" required>
+      </div>
+  
+      <div class="mb-2">
+        <label for="editAbondanceNectarPollen" class="form-label">Abondance de nectar et pollen</label>
+        <input type="text" class="form-control" id="editAbondanceNectarPollen" name="editAbondanceNectarPollen" [(ngModel)]="editPlante.abondanceNectarPollen" required>
+      </div>
+      <div class="mb-2">
+        <label for="editDureeFloraison" class="form-label">Durée de la floraison</label>
+        <input type="text" class="form-control" id="editDureeFloraison" name="editDureeFloraison" [(ngModel)]="editPlante.dureeFloraison" required>
+      </div>
+      <div class="mb-2">
+        <label for="editConditionsCroissance" class="form-label">Conditions de croissance</label>
+        <input type="text" class="form-control" id="editConditionsCroissance" name="editConditionsCroissance" [(ngModel)]="editPlante.conditionsCroissance" required>
+      </div>
+      <div class="mb-2">
+        <label for="editNombreRuchesMax" class="form-label">Nombre max de ruches recommandées</label>
+        <input type="number" class="form-control" id="editNombreRuchesMax" name="editNombreRuchesMax" [(ngModel)]="editPlante.nombreRuchesMax" required>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" (click)="updatePlante()">Modifier</button>
+      </div>
+    </form>  

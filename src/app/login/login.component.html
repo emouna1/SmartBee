@@ -1,0 +1,43 @@
+<!-- login.component.html -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="text-center">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+          style="width: 185px;" alt="logo">
+        <h4 class="mt-1 mb-5 pb-1">Smart BEE Team</h4>
+      </div>
+
+      <form (ngSubmit)="login()">
+        <p>Please log in to your account</p>
+
+        <div class="form-group">
+          <label for="userName">Username</label>
+          <input type="text" id="userName" class="form-control" [(ngModel)]="userName" name="userName" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" />
+        </div>
+
+        <div class="text-center pt-1 mb-5 pb-1">
+          <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log in</button>
+          <a class="text-muted" href="#!">Forgot password?</a>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-center pb-4">
+          <p class="mb-0 me-2">Don't have an account?</p>
+          <button type="button" class="btn btn-outline-danger">Create new</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-6">
+      <div class=" px-3 py-4 p-md-5 mx-md-4">
+        <h4 class="mb-4">Sur nous</h4>
+        <p class="small mb-0">Notre agence repousse les limites de l'apiculture traditionnelle en intégrant la puissance de la technologie. Grâce à notre outil d'aide à la décision innovant, nous offrons aux apiculteurs une perspective inégalée sur leurs ruches. Des recommandations personnalisées basées sur des données en temps réel, combinées à des années d'expertise, vous aident à prendre des décisions éclairées. Optez pour l'avenir de l'apiculture avec Smart Bee.</p>
+      </div>
+    </div>
+  </div>
+</div>

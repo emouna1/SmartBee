@@ -1,0 +1,29 @@
+/* Styling for the chart container */
+.chart-container {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for the chart title */
+  .chart-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  /* Custom styling for the chart itself */
+  .custom-chart {
+    height: 500px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  .container {
+    min-height: 100vh;
+    background-image: url('../../assets/Bees-and-honey-vector-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
